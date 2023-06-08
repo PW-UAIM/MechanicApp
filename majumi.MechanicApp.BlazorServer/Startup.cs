@@ -22,6 +22,7 @@ using Microsoft.Extensions.Hosting;
 using majumi.MechanicApp.Controller;
 using majumi.MechanicApp.Model;
 using majumi.MechanicApp.Utilities;
+using Radzen;
 
 namespace majumi.MechanicApp.BlazorServer;
 
@@ -38,8 +39,8 @@ public class Startup
 	{
 		services.AddRazorPages();
 		services.AddServerSideBlazor();
-
-		services.AddScoped<IEventDispatcher, EmptyEventDispatcher>();
+        services.AddScoped<DialogService>();
+        services.AddScoped<IEventDispatcher, EmptyEventDispatcher>();
 		services.AddScoped<IModel, Model.Model>();
 		services.AddScoped<IController, Controller.Controller>();
 	}

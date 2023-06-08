@@ -98,7 +98,7 @@ public class UnitTests
 	[TestMethod]
 	public void t_07_GetVisitsAt()
 	{
-		model.SelectedDate = new DateOnly(2000, 1, 1);
+		model.SelectedDate = new DateOnly(2023, 6, 1);
 		model.GetVisitsAt();
 		int expectedCount = 1;
 		int actualCount = model.VisitList.Count;

@@ -1,0 +1,67 @@
+﻿@page "/visits"
+
+@inject IModel model
+@inject IController controller
+@inject DialogService DialogService
+<RadzenDialog />
+<RadzenScheduler @ref=@scheduler SlotRender=@OnSlotRender style="height: 768px;" TItem="VisitData" Data=@model.VisitList StartProperty="ServiceDate" EndProperty="ServiceDate"
+                 TextProperty="ServiceType" SelectedIndex="2"
+    AppointmentSelect=@OnAppointmentSelect AppointmentRender=@OnAppointmentRender>
+    <RadzenDayView />
+    <RadzenWeekView />
+    <RadzenMonthView />
+    <RadzenYearView />
+</RadzenScheduler>
+
+@code {
+    RadzenScheduler<VisitData> scheduler;
+
+    Dictionary<DateTime, string> events = new Dictionary<DateTime, string>();
+
+    private async Task LoadVisits()
+    {
+        model.MechanicID = 1;
+        await controller.LoadVisitsAsync();
+        Console.WriteLine(model.VisitList.Count);
+        await scheduler.Reload();
+    }
+
+    protected async override Task OnInitializedAsync()
+    {
+        await LoadVisits();
+    }
+
+
+    void OnSlotRender(SchedulerSlotRenderEventArgs args)
+    {
+        // Highlight today in month view
+        if (args.View.Text == "Month" && args.Start.Date == DateTime.Today)
+        {
+            args.Attributes["style"] = "background: rgba(255,220,40,.2);";
+        }
+
+        // Highlight working hours (8-20)
+        if ((args.View.Text == "Week" || args.View.Text == "Day") && args.Start.Hour >= 8 && args.Start.Hour <= 20)
+        {
+            args.Attributes["style"] = "background: rgba(255,220,40,.2);";
+        }
+    }
+
+    async Task OnAppointmentSelect(SchedulerAppointmentSelectEventArgs<VisitData> args)
+    {
+        Console.WriteLine("Press");
+        model.SearchedVisitID = args.Data.VisitID;
+        await controller.GetVisitAsync();
+        await DialogService.OpenAsync<EditVisit>("Edit Visit");
+
+        await scheduler.Reload();
+    }
+
+    void OnAppointmentRender(SchedulerAppointmentRenderEventArgs<VisitData> args)
+    {
+        //if (args.Data.Text == "Birthday")
+        //{
+        //    args.Attributes["style"] = "background: red";
+        //}
+    }
+}

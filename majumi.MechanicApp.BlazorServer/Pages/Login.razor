@@ -1,0 +1,27 @@
+﻿@page "/login"
+@using majumi.CarService.MechanicsAppService.Rest.Model;
+@inject IController controller
+@inject IModel model
+@inject NavigationManager NavManager
+
+<h2>Login Page</h2>
+
+<RadzenNumeric ShowUpDown="false" TValue="int"  @bind-Value=@numericInputValue Placeholder="Enter ClientID" />
+<RadzenButton Click=MechanicLogIn Text="Login" ButtonStyle="ButtonStyle.Primary" />
+<RadzenLabel @bind-Text=@labelText></RadzenLabel>
+@code {
+	int numericInputValue;
+	string labelText;
+	private async Task MechanicLogIn()
+	{
+		model.MechanicID = numericInputValue;
+		await controller.MechanicLogInAsync();
+		Console.WriteLine($"[DEBUG] Logowanie jako klient {numericInputValue}, status ({model.LoginConfirmation}), aktualnie zalogowano jako ClientID={model.MechanicID}");
+		if(model.LoginConfirmation == true) {
+			NavManager.NavigateTo("/account");
+		} else
+		{
+			labelText = "There is no client with such an id";
+		}
+	}
+}

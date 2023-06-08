@@ -1,0 +1,90 @@
+﻿@page "/account"
+@using majumi.CarService.MechanicsAppService.Rest.Model;
+@inject IController controller
+@inject IModel model
+@inject NavigationManager NavManager
+
+<h2>Account Page</h2>
+
+<RadzenDataGrid style="height: 335px" @ref="carGrid" IsLoading=@isCarGridLoading Count="@carGridCount" Data="@cars" LoadData="@LoadCarData" TItem="CarData">
+    <Columns>
+		<RadzenDataGridColumn TItem="CarData" Property="CarID" Title="CarID"/>
+		<RadzenDataGridColumn TItem="CarData" Property="ClientID" Title="ClientID"/>
+		<RadzenDataGridColumn TItem="CarData" Property="Make" Title="Make"/>
+		<RadzenDataGridColumn TItem="CarData" Property="Model" Title="Model"/>
+		<RadzenDataGridColumn TItem="CarData" Property="EngineSize" Title="EngineSize"/>
+		<RadzenDataGridColumn TItem="CarData" Property="LicensePlate" Title="LicensePlate"/>
+		<RadzenDataGridColumn TItem="CarData" Property="Mileage" Title="Mileage"/>
+		<RadzenDataGridColumn TItem="CarData" Property="VIN" Title="VIN"/>
+		<RadzenDataGridColumn TItem="CarData" Property="Year" Title="Year" />
+    </Columns>
+</RadzenDataGrid>
+<RadzenButton Text="Add car" Click=RedirectToMyCar Style="width: 160px" />
+@code {
+    RadzenDataGrid<CarData> carGrid;
+    IEnumerable<CarData> cars;
+    int carGridCount;
+    bool isCarGridLoading = false;
+
+    protected override void OnInitialized()
+	{
+		//Check if client is logged in
+		if (model.MechanicID == 0 || model.LoginConfirmation == false)
+		{
+			NavManager.NavigateTo("/login");
+		}
+	}
+
+    async Task LoadCarData(LoadDataArgs args)
+    {
+        isCarGridLoading = true;
+
+        await controller.LoadCarsAsync();
+        cars = model.CarList;
+        carGridCount = cars.Count();
+        isCarGridLoading = false;
+    }
+
+    private void RedirectToMyCar()
+    {
+        NavManager.NavigateTo("/myCar");
+    }
+
+}
+
+<RadzenDataGrid style="height: 335px" @ref="visitsGrid" IsLoading=@isVisitGridLoading Count="@visitGridCount" Data="@visits" LoadData="@LoadVisitData" TItem="VisitData">
+    <Columns>
+        <RadzenDataGridColumn TItem="VisitData" Property="VisitID" Title="VisitID"/>
+        <RadzenDataGridColumn TItem="VisitData" Property="CarID" Title="CarID"/>
+        <RadzenDataGridColumn TItem="VisitData" Property="ClientID" Title="ClientID"/>
+        <RadzenDataGridColumn TItem="VisitData" Property="MechanicID" Title="MechanicID"/>
+        <RadzenDataGridColumn TItem="VisitData" Property="Notes" Title="Notes"/>
+        <RadzenDataGridColumn TItem="VisitData" Property="ServiceCost" Title="ServiceCost"/>
+        <RadzenDataGridColumn TItem="VisitData" Property="ServiceDate" Title="ServiceDate"/>
+        <RadzenDataGridColumn TItem="VisitData" Property="ServiceStatus" Title="ServiceStatus"/>
+        <RadzenDataGridColumn TItem="VisitData" Property="ServiceType" Title="ServiceType"/>
+    </Columns>
+</RadzenDataGrid>
+<RadzenButton Text="Add visit" Click=RedirectToMyVisit Style="width: 160px" />
+@code {
+    RadzenDataGrid<VisitData> visitsGrid;
+    IEnumerable<VisitData> visits;
+    int visitGridCount;
+    bool isVisitGridLoading = false;
+
+    async Task LoadVisitData(LoadDataArgs args)
+    {
+        isVisitGridLoading = true;
+        // model.SelectedDate = new DateOnly(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
+        model.SelectedDate = new DateOnly(2000, 1, 1);
+        await controller.GetVisitAtAsync();
+        visits = model.VisitList;
+        visitGridCount = visits.Count();
+        isVisitGridLoading = false;
+    }
+
+    private void RedirectToMyVisit()
+    {
+        NavManager.NavigateTo("/myVisit");
+    }
+}

@@ -53,8 +53,8 @@ public class FakeNetworkClient : IClient
 			MechanicID = 1, 
 			Notes = "", 
 			ServiceCost = 230, 
-			ServiceDate = new DateTime(2000, 1, 1), 
-			ServiceStatus = "W trakcie", 
+			ServiceDate = new DateTime(2023, 6, 1, 12, 0, 0),
+            ServiceStatus = "W trakcie", 
 			ServiceType = "Wymiana plynu w wycieraczkach"
 		} 
 	};
