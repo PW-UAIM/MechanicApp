@@ -1,50 +1,65 @@
-<!-- Topbar Start -->
-<div class="container-fluid px-0 d-none d-lg-block">
-    <div class="row gx-0">
-        <div class="col-lg-4 text-center bg-secondary py-3">
-            <div class="d-inline-flex align-items-center justify-content-center">
-                <i class="bi bi-envelope fs-1 text-primary me-3"></i>
-                <div class="text-start">
-                    <h6 class="text-uppercase mb-1">Email Us</h6>
-                    <span>info@example.com</span>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4 text-center bg-primary border-inner py-3">
-            <div class="d-inline-flex align-items-center justify-content-center">
-                <a href="" class="navbar-brand">
-                    <h1 class="m-0 text-uppercase text-white"><i class="fa fa-birthday-cake fs-1 text-dark me-3"></i>CakeZone</h1>
-                </a>
-            </div>
-        </div>
-        <div class="col-lg-4 text-center bg-secondary py-3">
-            <div class="d-inline-flex align-items-center justify-content-center">
-                <i class="bi bi-phone-vibrate fs-1 text-primary me-3"></i>
-                <div class="text-start">
-                    <h6 class="text-uppercase mb-1">Call Us</h6>
-                    <span>+012 345 6789</span>
-                </div>
+﻿<html lang="pl">
+<!-- Zielony navbar-->
+<header class="site-header">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-8 col-12 d-flex flex-wrap">
+                <p class="d-flex me-4 mb-0">
+                    <i class="bi-geo-alt me-2"></i>
+                    Politechnika Warszawska, Polska
+                </p>
+
+                <p class="d-flex mb-0">
+                    <i class="bi-envelope me-2"></i>
+
+                    <a href="mailto:majumi@carservice.com">
+                        majumi@carservice.com
+                    </a>
+                </p>
             </div>
         </div>
     </div>
-</div>
-<!-- Topbar End -->
-<!-- Navbar Start -->
-<nav class="navbar navbar-expand-lg bg-dark navbar-dark shadow-sm py-3 py-lg-0 px-3 px-lg-0">
-    <a href="index.html" class="navbar-brand d-block d-lg-none">
-        <h1 class="m-0 text-uppercase text-white"><i class="fa fa-birthday-cake fs-1 text-primary me-3"></i>CakeZone</h1>
-    </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarCollapse">
-        <div class="navbar-nav ms-auto mx-lg-auto py-0">
-            <a href="" class="nav-item nav-link active">Home</a>
-            <a href="account" class="nav-item nav-link">Account</a>
-            <a href="addCar" class="nav-item nav-link">Add Car</a>
-            <a href="visits" class="nav-item nav-link">Visits</a>
-            <a href="login" class="nav-item nav-link">Login</a>
+</header>
+
+<!-- Koniec zielonego navbaru-->
+<!-- Navbar z logiem-->
+<nav class="navbar navbar-expand-lg bg-light shadow-lg">
+    <div class="container">
+        <a class="navbar-brand">
+            <img src="majumiservice/images/majumi.png" class="logo img-fluid" alt="MaJuMi CarService">
+            <span>
+                Majumi CarService
+                <small>Serwis samochodowy</small>
+            </span>
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a href="" class="nav-item nav-link active">Home</a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="login" class="nav-item nav-link">Login</a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="visits" class="nav-item nav-link">Przeglądy</a>
+                </li>
+
+                <li class="nav-item ms-3">
+                    <a class="nav-link custom-btn custom-border-btn btn" href="account">Konto</a>
+                </li>
+            </ul>
         </div>
     </div>
 </nav>
-<!-- Navbar End -->
+
+<!-- Navbar z logiem-->
+
+</html>

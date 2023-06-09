@@ -4,17 +4,20 @@
 @inject IModel model
 @inject NavigationManager NavManager
 
-<h2>Login Page</h2>
+<div class="col-lg-10 col-12 text-center mx-auto">
+	<p>
+		<br>
+	</p>
+	<h2 class="mb-5">Główna strona logowania</h2>
+</div>
 
-<RadzenNumeric ShowUpDown="false" TValue="int"  @bind-Value=@numericInputValue Placeholder="Enter ClientID" />
-<RadzenButton Click=MechanicLogIn Text="Login" ButtonStyle="ButtonStyle.Primary" />
-<RadzenLabel @bind-Text=@labelText></RadzenLabel>
+
 @code {
-	int numericInputValue;
+	int? numericInputValue;
 	string labelText;
 	private async Task MechanicLogIn()
 	{
-		model.MechanicID = numericInputValue;
+        model.MechanicID = numericInputValue == null ? 0 : (int)numericInputValue;
 		await controller.MechanicLogInAsync();
 		Console.WriteLine($"[DEBUG] Logowanie jako klient {numericInputValue}, status ({model.LoginConfirmation}), aktualnie zalogowano jako ClientID={model.MechanicID}");
 		if(model.LoginConfirmation == true) {
@@ -25,3 +28,29 @@
 		}
 	}
 }
+<main>
+    <section class="donate-section">
+        <div class="section-overlay"></div>
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-6 col-12 mx-auto">
+                    <div class="custom-form donate-form" method="get" role="form">
+                        <h3 class="mb-4 text-center">Zaloguj się jako Mechanik</h3>
+                        <img src="/majumiservice/images/majumi2.png" class=" image-center img-fluid" alt="">
+                        <div class="col-lg-12 col-12">
+                            <h5 class="mb-3">Login:</h5>
+                        </div>
+                        <div class="row">
+                            <RadzenNumeric ShowUpDown="false" TValue="int?" @bind-Value=@numericInputValue type="text" class="form-control" Style="text-align:center" Placeholder="Enter MechanicID" required />
+                            <RadzenButton Click=MechanicLogIn type="submit" class="form-control mt-4">Login</RadzenButton>
+                            <div class="mt-4 error">
+                                <RadzenLabel @bind-Text=@labelText class="errortext" for="DonationFrequencyOne"></RadzenLabel>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

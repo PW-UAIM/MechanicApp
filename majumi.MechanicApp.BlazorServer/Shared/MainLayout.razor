@@ -1,8 +1,8 @@
 @inherits LayoutComponentBase
-@inject IJSRuntime JSRuntime 
+@inject IJSRuntime JSRuntime
 
 <div>
-	<NavMenu />
+    <NavMenu />
 </div>
 
 @Body
@@ -20,6 +20,12 @@
             await JSRuntime.InvokeAsync<IJSObjectReference>("import", "/carservice/lib/counterup/counterup.min.js");
             await JSRuntime.InvokeAsync<IJSObjectReference>("import", "/carservice/lib/owlcarousel/owl.carousel.min.js");
             await JSRuntime.InvokeAsync<IJSObjectReference>("import", "/carservice/js/main.js");
+            await JSRuntime.InvokeAsync<IJSObjectReference>("import", "/majumiservice/js/bootstrap.min.js");
+            await JSRuntime.InvokeAsync<IJSObjectReference>("import", "/majumiservice/js/click-scroll.js");
+            await JSRuntime.InvokeAsync<IJSObjectReference>("import", "/majumiservice/js/counter.js");
+            await JSRuntime.InvokeAsync<IJSObjectReference>("import", "/majumiservice/js/custom.js");
+            await JSRuntime.InvokeAsync<IJSObjectReference>("import", "/majumiservice/js/jquery.min.js");
+            await JSRuntime.InvokeAsync<IJSObjectReference>("import", "/majumiservice/js/jquery.sticky.js");
         }
     }
 }
