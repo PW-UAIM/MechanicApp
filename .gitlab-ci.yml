@@ -2,7 +2,7 @@ stages:
     - build
     - test
     - docker
-    - production
+    - deploy
 
 build_debug:
     stage: build
