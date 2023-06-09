@@ -1,0 +1,93 @@
+﻿@inject IModel model
+@inject IController controller
+@inject DialogService DialogService
+
+<RadzenTemplateForm TItem="VisitData" Data="@model.SelectedVisit">
+    <div class="row" style="margin-bottom: 16px">
+        <div class="col-md-3">
+            <RadzenLabel Text="VisitID" />
+        </div>
+        <div class="col">
+            <RadzenNumeric Disabled @bind-Value="@model.SelectedVisit.VisitID" Name="VisitID" />
+        </div>
+    </div>
+    <div class="row" style="margin-bottom: 16px">
+        <div class="col-md-3">
+            <RadzenLabel Text="ClientID" />
+        </div>
+        <div class="col">
+            <RadzenNumeric Disabled @bind-Value="@model.SelectedVisit.ClientID" Name="ClientID" />
+        </div>
+    </div>
+        <div class="row" style="margin-bottom: 16px">
+        <div class="col-md-3">
+            <RadzenLabel Text="MechanicID" />
+        </div>
+        <div class="col">
+            <RadzenNumeric Disabled @bind-Value="@model.SelectedVisit.MechanicID" Name="MechanicID" />
+        </div>
+    </div>
+    <div class="row" style="margin-bottom: 16px">
+        <div class="col-md-3">
+            <RadzenLabel Text="CarID" />
+        </div>
+        <div class="col">
+            <RadzenNumeric Disabled @bind-Value="@model.SelectedVisit.CarID" Name="CarID" />
+        </div>
+    </div>
+    <div class="row" style="margin-bottom: 16px">
+        <div class="col-md-3">
+            <RadzenLabel Text="ServiceType" />
+        </div>
+        <div class="col">
+            <RadzenTextBox Disabled @bind-Value="@model.SelectedVisit.ServiceType" Name="ServiceType" />
+        </div>
+    </div>
+    <div class="row" style="margin-bottom: 16px">
+        <div class="col-md-3">
+            <RadzenLabel Text="ServiceDate" />
+        </div>
+        <div class="col">
+            <RadzenDatePicker Disabled @bind-Value="@model.SelectedVisit.ServiceDate" Name="ServiceDate" />
+        </div>
+    </div>
+    <div class="row" style="margin-bottom: 16px">
+        <div class="col-md-3">
+            <RadzenLabel Text="ServiceCost" />
+        </div>
+        <div class="col">
+            <RadzenNumeric Disabled @bind-Value="@model.SelectedVisit.ServiceCost" Name="ServiceCost" />
+        </div>
+    </div>
+    <div class="row" style="margin-bottom: 16px">
+        <div class="col-md-3">
+            <RadzenLabel Text="ServiceStatus" />
+        </div>
+        <div class="col">
+            <RadzenTextBox Disabled @bind-Value="@model.SelectedVisit.ServiceStatus" Name="ServiceStatus" />
+        </div>
+    </div>
+    <div class="row" style="margin-bottom: 16px">
+        <div class="col-md-3">
+            <RadzenLabel Text="Notes" />
+        </div>
+        <div class="col">
+            <RadzenTextBox Disabled @bind-Value="@model.SelectedVisit.Notes" Name="Notes" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col">
+            <RadzenButton Click="@Edit" Text="Edit" />
+        </div>
+    </div>
+</RadzenTemplateForm>
+
+
+
+@code {
+    async Task Edit()
+    {
+        await DialogService.OpenAsync<EditVisit>("Edit Visit");
+    }
+}

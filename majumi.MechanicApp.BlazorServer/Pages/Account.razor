@@ -3,9 +3,9 @@
 @inject IController controller
 @inject IModel model
 @inject NavigationManager NavManager
-
+@inject DialogService DialogService
 <h2>Account Page</h2>
-
+<RadzenDialog />
 <RadzenDataGrid style="height: 335px" @ref="carGrid" IsLoading=@isCarGridLoading Count="@carGridCount" Data="@cars" LoadData="@LoadCarData" TItem="CarData">
     <Columns>
 		<RadzenDataGridColumn TItem="CarData" Property="CarID" Title="CarID"/>
@@ -19,7 +19,6 @@
 		<RadzenDataGridColumn TItem="CarData" Property="Year" Title="Year" />
     </Columns>
 </RadzenDataGrid>
-<RadzenButton Text="Add car" Click=RedirectToMyCar Style="width: 160px" />
 @code {
     RadzenDataGrid<CarData> carGrid;
     IEnumerable<CarData> cars;
@@ -45,46 +44,62 @@
         isCarGridLoading = false;
     }
 
-    private void RedirectToMyCar()
-    {
-        NavManager.NavigateTo("/myCar");
-    }
-
 }
 
-<RadzenDataGrid style="height: 335px" @ref="visitsGrid" IsLoading=@isVisitGridLoading Count="@visitGridCount" Data="@visits" LoadData="@LoadVisitData" TItem="VisitData">
-    <Columns>
-        <RadzenDataGridColumn TItem="VisitData" Property="VisitID" Title="VisitID"/>
-        <RadzenDataGridColumn TItem="VisitData" Property="CarID" Title="CarID"/>
-        <RadzenDataGridColumn TItem="VisitData" Property="ClientID" Title="ClientID"/>
-        <RadzenDataGridColumn TItem="VisitData" Property="MechanicID" Title="MechanicID"/>
-        <RadzenDataGridColumn TItem="VisitData" Property="Notes" Title="Notes"/>
-        <RadzenDataGridColumn TItem="VisitData" Property="ServiceCost" Title="ServiceCost"/>
-        <RadzenDataGridColumn TItem="VisitData" Property="ServiceDate" Title="ServiceDate"/>
-        <RadzenDataGridColumn TItem="VisitData" Property="ServiceStatus" Title="ServiceStatus"/>
-        <RadzenDataGridColumn TItem="VisitData" Property="ServiceType" Title="ServiceType"/>
-    </Columns>
-</RadzenDataGrid>
-<RadzenButton Text="Add visit" Click=RedirectToMyVisit Style="width: 160px" />
+<RadzenDialog />
+<RadzenScheduler @ref=@scheduler SlotRender=@OnSlotRender style="height: 768px;" TItem="VisitData" Data=@model.VisitList StartProperty="ServiceDate" EndProperty="ServiceDate"
+                 TextProperty="ServiceType" SelectedIndex="0"
+                 AppointmentSelect=@OnAppointmentSelect AppointmentRender=@OnAppointmentRender>
+    <RadzenDayView/>
+</RadzenScheduler>
 @code {
-    RadzenDataGrid<VisitData> visitsGrid;
-    IEnumerable<VisitData> visits;
-    int visitGridCount;
-    bool isVisitGridLoading = false;
+    RadzenScheduler<VisitData> scheduler;
 
-    async Task LoadVisitData(LoadDataArgs args)
+    private async Task LoadVisits()
     {
-        isVisitGridLoading = true;
-        // model.SelectedDate = new DateOnly(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
-        model.SelectedDate = new DateOnly(2000, 1, 1);
-        await controller.GetVisitAtAsync();
-        visits = model.VisitList;
-        visitGridCount = visits.Count();
-        isVisitGridLoading = false;
+        //model.MechanicID = 1;
+        await controller.LoadVisitsAsync();
+        Console.WriteLine(model.VisitList.Count);
+        await scheduler.Reload();
     }
 
-    private void RedirectToMyVisit()
+    protected async override Task OnInitializedAsync()
     {
-        NavManager.NavigateTo("/myVisit");
+        await LoadVisits();
     }
+
+
+    void OnSlotRender(SchedulerSlotRenderEventArgs args)
+    {
+        // Highlight today in month view
+        if (args.View.Text == "Month" && args.Start.Date == DateTime.Today)
+        {
+            args.Attributes["style"] = "background: rgba(255,220,40,.2);";
+        }
+
+        // Highlight working hours (8-20)
+        if ((args.View.Text == "Week" || args.View.Text == "Day") && args.Start.Hour >= 8 && args.Start.Hour <= 20)
+        {
+            args.Attributes["style"] = "background: rgba(255,220,40,.2);";
+        }
+    }
+
+    async Task OnAppointmentSelect(SchedulerAppointmentSelectEventArgs<VisitData> args)
+    {
+        Console.WriteLine("Press");
+        model.SearchedVisitID = args.Data.VisitID;
+        await controller.GetVisitAsync();
+        await DialogService.OpenAsync<ShowVisit>("Visit details");
+
+        await scheduler.Reload();
+    }
+
+    void OnAppointmentRender(SchedulerAppointmentRenderEventArgs<VisitData> args)
+    {
+        //if (args.Data.Text == "Birthday")
+        //{
+        //    args.Attributes["style"] = "background: red";
+        //}
+    }
+
 }
