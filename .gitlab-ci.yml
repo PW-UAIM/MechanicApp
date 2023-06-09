@@ -53,13 +53,16 @@ push_image:
     tags:
       - docker
 
-#production:
-#    stage: deploy
-#    needs: [push_image]
-#    before_script:
-#      - cd Kubernetes
-#    script:
-#      - Kubernetes_StopSystem.bat
-#      - Kubernetes_StartSystem.bat
-#    tags:
-#      - kubernetes
+production:
+    stage: deploy
+    needs: [push_image]
+    before_script:
+      - cd Kubernetes
+    script:
+      - kubectl config set-cluster microk8s-cluster --server=http://localhost:8080 --insecure-skip-tls-verify
+      - kubectl config set-credentials admin --token=$KUBERNETES_TOKEN
+      - kubectl config set-context microk8s --cluster=microk8s-cluster --namespace=default --user=admin
+      - kubectl config use-context microk8s
+      - kubectl rollout restart deployment/mechanicapp-deploy
+    tags:
+      - kubernetes
