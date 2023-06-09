@@ -2,13 +2,13 @@
 @inject IController controller
 @inject DialogService DialogService
 
-<RadzenTemplateForm TItem="VisitData" Data="@model.SelectedVisit" Submit=@OnSubmit>
+<RadzenTemplateForm TItem="VisitData" Data="@model.SelectedVisit" Submit=@OnSubmit class="text-white">
     <div class="row" style="margin-bottom: 16px">
         <div class="col-md-3">
             <RadzenLabel Text="Koszt usługi" />
         </div>
         <div class="col">
-            <RadzenNumeric @bind-Value="@model.NewCost" Name="Cost" class="text-white" Style="text-align:center " />
+            <RadzenNumeric @bind-Value="@model.NewCost" Name="Cost" class="text-white" Style="text-align:center; color:white" />
             <RadzenRequiredValidator Text="Title is required" Component="Cost" />
         </div>
     </div>

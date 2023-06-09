@@ -106,7 +106,6 @@
 </div>
 <div class="container-fluid">
     <div class="container">
-        <RadzenDialog />
         <RadzenDataGrid style="height: 335px; margin: 0; padding:0;" class=" ms-lg-auto shadow-lg img-fluid site-footer-bottom" @ref="carGrid" IsLoading=@isCarGridLoading Count="@carGridCount" Data="@cars" LoadData="@LoadCarData" TItem="CarData">
             <Columns>
                 <RadzenDataGridColumn TItem="CarData" Property="CarID" Title="CarID" />
@@ -157,7 +156,6 @@
 </div>
 <div class="container-fluid">
     <div class="container">
-        <RadzenDialog />
         <RadzenScheduler @ref=@scheduler SlotRender=@OnSlotRender class=" ms-lg-auto shadow-lg img-fluid site-footer-bottom" style="height: 862px; margin:0; padding: 0;" TItem="VisitData" Data=@model.VisitList StartProperty="ServiceDate" EndProperty="ServiceDate"
                          TextProperty="ServiceType" SelectedIndex="0"
                          AppointmentSelect=@OnAppointmentSelect AppointmentRender=@OnAppointmentRender>
