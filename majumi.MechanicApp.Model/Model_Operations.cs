@@ -29,6 +29,10 @@ public partial class Model : IOperations
 			{
 				MechanicID = 0;
 			}
+			else
+			{
+				LoggedMechanic = confirmation.Mechanic;
+			}
 			LoginConfirmation = confirmation.IsSuccesfull;
 		}
 		catch (Exception e)

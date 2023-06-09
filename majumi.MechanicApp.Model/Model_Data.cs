@@ -133,4 +133,15 @@ public partial class Model : IData
 			RaisePropertyChanged(nameof(SelectedDate));
 		}
 	}
+
+	private MechanicData loggedMechanic;
+	public MechanicData LoggedMechanic
+	{
+		get { return loggedMechanic;}
+		set
+		{
+			loggedMechanic = value;
+			RaisePropertyChanged(nameof(LoggedMechanic));
+		}
+	}
 }

@@ -19,12 +19,12 @@
 	{
         model.MechanicID = numericInputValue == null ? 0 : (int)numericInputValue;
 		await controller.MechanicLogInAsync();
-		Console.WriteLine($"[DEBUG] Logowanie jako klient {numericInputValue}, status ({model.LoginConfirmation}), aktualnie zalogowano jako ClientID={model.MechanicID}");
+		Console.WriteLine($"[DEBUG] Logowanie jako klient {numericInputValue}, status ({model.LoginConfirmation}), aktualnie zalogowano jako MechanicID={model.MechanicID}");
 		if(model.LoginConfirmation == true) {
 			NavManager.NavigateTo("/account");
 		} else
 		{
-			labelText = "There is no client with such an id";
+			labelText = "Nie ma mechanika o takim identyfikatorze";
 		}
 	}
 }

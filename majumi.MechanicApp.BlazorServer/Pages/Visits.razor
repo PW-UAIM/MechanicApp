@@ -3,12 +3,23 @@
 @inject IModel model
 @inject IController controller
 @inject DialogService DialogService
-<RadzenDialog />
-<RadzenScheduler @ref=@scheduler SlotRender=@OnSlotRender style="height: 768px;" TItem="VisitData" Data=@model.VisitList StartProperty="ServiceDate" EndProperty="ServiceDate"
-                 TextProperty="ServiceType" SelectedIndex="0"
-    AppointmentSelect=@OnAppointmentSelect AppointmentRender=@OnAppointmentRender>
-    <RadzenMonthView/>
-</RadzenScheduler>
+
+
+<div class="col-lg-10 col-12 text-center mx-auto">
+</div>
+<div class="container-fluid py-5">
+    <div class="container">
+        <RadzenDialog />
+        <RadzenScheduler @ref=@scheduler SlotRender=@OnSlotRender class=" ms-lg-auto shadow-lg img-fluid site-footer-bottom" style="height: 768px;" TItem="VisitData" Data=@model.VisitList StartProperty="ServiceDate" EndProperty="ServiceDate"
+                         TextProperty="ServiceType" SelectedIndex="0"
+                         AppointmentSelect=@OnAppointmentSelect AppointmentRender=@OnAppointmentRender>
+            <RadzenMonthView />
+        </RadzenScheduler>
+        <p> </p>
+    </div>
+
+</div>
+
 
 @code {
     RadzenScheduler<VisitData> scheduler;
@@ -32,13 +43,13 @@
         // Highlight today in month view
         if (args.View.Text == "Month" && args.Start.Date == DateTime.Today)
         {
-            args.Attributes["style"] = "background: rgba(255,220,40,.2);";
+            args.Attributes["style"] = "background: rgba(0,220,40,.2);";
         }
 
         // Highlight working hours (8-20)
         if ((args.View.Text == "Week" || args.View.Text == "Day") && args.Start.Hour >= 8 && args.Start.Hour <= 20)
         {
-            args.Attributes["style"] = "background: rgba(255,220,40,.2);";
+            args.Attributes["style"] = "background: rgba(0,220,40,.2);";
         }
     }
 

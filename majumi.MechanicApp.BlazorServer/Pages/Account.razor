@@ -4,21 +4,127 @@
 @inject IModel model
 @inject NavigationManager NavManager
 @inject DialogService DialogService
-<h2>Account Page</h2>
 <RadzenDialog />
-<RadzenDataGrid style="height: 335px" @ref="carGrid" IsLoading=@isCarGridLoading Count="@carGridCount" Data="@cars" LoadData="@LoadCarData" TItem="CarData">
-    <Columns>
-		<RadzenDataGridColumn TItem="CarData" Property="CarID" Title="CarID"/>
-		<RadzenDataGridColumn TItem="CarData" Property="ClientID" Title="ClientID"/>
-		<RadzenDataGridColumn TItem="CarData" Property="Make" Title="Make"/>
-		<RadzenDataGridColumn TItem="CarData" Property="Model" Title="Model"/>
-		<RadzenDataGridColumn TItem="CarData" Property="EngineSize" Title="EngineSize"/>
-		<RadzenDataGridColumn TItem="CarData" Property="LicensePlate" Title="LicensePlate"/>
-		<RadzenDataGridColumn TItem="CarData" Property="Mileage" Title="Mileage"/>
-		<RadzenDataGridColumn TItem="CarData" Property="VIN" Title="VIN"/>
-		<RadzenDataGridColumn TItem="CarData" Property="Year" Title="Year" />
-    </Columns>
-</RadzenDataGrid>
+
+<div class="col-lg-10 col-12 text-center mx-auto">
+    <p>
+        <br>
+    </p>
+    <h2 class="mb-1">Moje konto</h2>
+    <br>
+</div>
+
+
+<div class="container-fluid py-5">
+    <div class="container">
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <div class="d-flex align-items-center border mb-4 mb-lg-0 p-4" style="height: 120px;">
+                    <i class="bi-person-workspace mr-3"></i>
+                    <div class="d-flex flex-column">
+                        <h5 class="font-weight-bold">Imię</h5>
+                        <p class="m-0"><RadzenLabel Text="@($"{(model.LoggedMechanic == null ? "null" : model.LoggedMechanic.Name)}")"></RadzenLabel></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="d-flex align-items-center border mb-4 mb-lg-0 p-4" style="height: 120px;">
+                    <i class=" bi-person-video3 mr-3"></i>
+                    <div class="d-flex flex-column">
+                        <h5 class="font-weight-bold">Nazwisko</h5>
+                        <p class="m-0"><RadzenLabel Text="@($"{(model.LoggedMechanic == null ? "null" : model.LoggedMechanic.Surname)}")"></RadzenLabel></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="d-flex align-items-center border mb-4 mb-lg-0 p-4" style="height: 120px;">
+                    <i class="bi-geo-alt mr-3"></i>
+                    <div class="d-flex flex-column">
+                        <h5 class="font-weight-bold">Adres</h5>
+                        <p class="m-0"><RadzenLabel Text="@($"{(model.LoggedMechanic == null ? "null" : model.LoggedMechanic.Address)}")"></RadzenLabel></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <div class="d-flex align-items-center border mb-4 mb-lg-0 p-4" style="height: 120px;">
+                    <i class="bi-envelope-open mr-3"></i>
+                    <div class="d-flex flex-column">
+                        <h5 class="font-weight-bold">E-mail</h5>
+                        <p class="m-0"><RadzenLabel Text="@($"{(model.LoggedMechanic == null ? "null" : model.LoggedMechanic.Email)}")"></RadzenLabel></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="d-flex align-items-center border mb-4 mb-lg-0 p-4" style="height: 120px;">
+                    <i class=" bi-calendar-date mr-3"></i>
+                    <div class="d-flex flex-column">
+                        <h5 class="font-weight-bold">Data zatrudnienia</h5>
+                        <p class="m-0"><RadzenLabel Text="@($"{(model.LoggedMechanic == null ? "null" : model.LoggedMechanic.HireDate)}")"></RadzenLabel></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="d-flex align-items-center border mb-4 mb-lg-0 p-4" style="height: 120px;">
+                    <i class="bi-wrench mr-3"></i>
+                    <div class="d-flex flex-column">
+                        <h5 class="font-weight-bold">Specjalność</h5>
+                        <p class="m-0"><RadzenLabel Text="@($"{(model.LoggedMechanic == null ? "null" : model.LoggedMechanic.Specialty)}")"></RadzenLabel></p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <div class="d-flex align-items-center border mb-4 mb-lg-0 p-4" style="height: 120px;">
+                    <i class="bi-phone mr-3"></i>
+                    <div class="d-flex flex-column">
+                        <h5 class="font-weight-bold">Numer Telefonu</h5>
+                        <p class="m-0"><RadzenLabel Text="@($"{(model.LoggedMechanic == null ? "null" : model.LoggedMechanic.Phone)}")"></RadzenLabel></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="d-flex align-items-center border mb-4 mb-lg-0 p-4" style="height: 120px;">
+                    <i class="bi-calendar-date mr-3"></i>
+                    <div class="d-flex flex-column">
+                        <h5 class="font-weight-bold">Data urodzenia</h5>
+                        <p class="m-0"><RadzenLabel Text="@($"{(model.LoggedMechanic == null ? "null" : model.LoggedMechanic.BirthDate)}")"></RadzenLabel></p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<div class="col-lg-10 col-12 text-center mx-auto">
+    <h2 class="mb-5">Zlecone przeglądy</h2>
+</div>
+<div class="container-fluid py-5">
+    <div class="container">
+        <RadzenDialog />
+        <RadzenDataGrid style="height: 335px" class=" ms-lg-auto shadow-lg img-fluid site-footer-bottom" @ref="carGrid" IsLoading=@isCarGridLoading Count="@carGridCount" Data="@cars" LoadData="@LoadCarData" TItem="CarData">
+            <Columns>
+                <RadzenDataGridColumn TItem="CarData" Property="CarID" Title="CarID" />
+                <RadzenDataGridColumn TItem="CarData" Property="ClientID" Title="ClientID" />
+                <RadzenDataGridColumn TItem="CarData" Property="Make" Title="Make" />
+                <RadzenDataGridColumn TItem="CarData" Property="Model" Title="Model" />
+                <RadzenDataGridColumn TItem="CarData" Property="EngineSize" Title="EngineSize" />
+                <RadzenDataGridColumn TItem="CarData" Property="LicensePlate" Title="LicensePlate" />
+                <RadzenDataGridColumn TItem="CarData" Property="Mileage" Title="Mileage" />
+                <RadzenDataGridColumn TItem="CarData" Property="VIN" Title="VIN" />
+                <RadzenDataGridColumn TItem="CarData" Property="Year" Title="Year" />
+            </Columns>
+        </RadzenDataGrid>
+        <p> </p>
+    </div>
+
+</div>
+
 @code {
     RadzenDataGrid<CarData> carGrid;
     IEnumerable<CarData> cars;
@@ -46,12 +152,22 @@
 
 }
 
-<RadzenDialog />
-<RadzenScheduler @ref=@scheduler SlotRender=@OnSlotRender style="height: 768px;" TItem="VisitData" Data=@model.VisitList StartProperty="ServiceDate" EndProperty="ServiceDate"
-                 TextProperty="ServiceType" SelectedIndex="0"
-                 AppointmentSelect=@OnAppointmentSelect AppointmentRender=@OnAppointmentRender>
-    <RadzenDayView/>
-</RadzenScheduler>
+<div class="col-lg-10 col-12 text-center mx-auto">
+    <h2 class="mb-5">Mój terminarz</h2>
+</div>
+<div class="container-fluid py-5">
+    <div class="container">
+        <RadzenDialog />
+        <RadzenScheduler @ref=@scheduler SlotRender=@OnSlotRender class=" ms-lg-auto shadow-lg img-fluid site-footer-bottom" style="height: 1000px;" TItem="VisitData" Data=@model.VisitList StartProperty="ServiceDate" EndProperty="ServiceDate"
+                         TextProperty="ServiceType" SelectedIndex="0"
+                         AppointmentSelect=@OnAppointmentSelect AppointmentRender=@OnAppointmentRender>
+            <RadzenDayView />
+        </RadzenScheduler>
+        <p> </p>
+    </div>
+
+</div>
+
 @code {
     RadzenScheduler<VisitData> scheduler;
 
@@ -74,13 +190,13 @@
         // Highlight today in month view
         if (args.View.Text == "Month" && args.Start.Date == DateTime.Today)
         {
-            args.Attributes["style"] = "background: rgba(255,220,40,.2);";
+            args.Attributes["style"] = "background: rgba(0,220,40,.2);";
         }
 
         // Highlight working hours (8-20)
         if ((args.View.Text == "Week" || args.View.Text == "Day") && args.Start.Hour >= 8 && args.Start.Hour <= 20)
         {
-            args.Attributes["style"] = "background: rgba(255,220,40,.2);";
+            args.Attributes["style"] = "background: rgba(0,220,40,.2);";
         }
     }
 
@@ -100,6 +216,20 @@
         //{
         //    args.Attributes["style"] = "background: red";
         //}
+    }
+
+    @code {
+        RadzenDataGrid<MechanicData> mechanicsGrid;
+        IEnumerable<MechanicData> mechanic;
+        bool isMechanicGridLoading = false;
+
+        async Task LoadMechanicData(LoadDataArgs args)
+        {
+            isMechanicGridLoading = true;
+
+            await controller.LoadVisitsAsync();
+            isMechanicGridLoading = false;
+        }
     }
 
 }

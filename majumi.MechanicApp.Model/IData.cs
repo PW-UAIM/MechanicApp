@@ -31,4 +31,6 @@ public interface IData : INotifyPropertyChanged
 	CarData SelectedCar { get; set; }
 	VisitData SelectedVisit { get; set;}
 	DateOnly SelectedDate { get; set; }
+
+	MechanicData LoggedMechanic { get; set; }
 }
