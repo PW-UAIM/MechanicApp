@@ -56,8 +56,6 @@ push_image:
 production:
     stage: deploy
     needs: [push_image]
-    before_script:
-      - cd Kubernetes
     script:
       - kubectl config set-cluster microk8s-cluster --server=http://localhost:8080 --insecure-skip-tls-verify
       - kubectl config set-credentials admin --token=$KUBERNETES_TOKEN
