@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "majumi.ClientApp.Controller": {
+    "majumi.MechanicApp.Controller": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {

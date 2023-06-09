@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <AssemblyName>majumi.ClientApp.BlazorServer</AssemblyName>
-    <RootNamespace>majumi.ClientApp.BlazorServer</RootNamespace>
+    <AssemblyName>majumi.MechanicApp.BlazorServer</AssemblyName>
+    <RootNamespace>majumi.MechanicApp.BlazorServer</RootNamespace>
     <UserSecretsId>5ea87fc5-2577-4313-90c2-ff65c3451f86</UserSecretsId>
     <DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
   </PropertyGroup>
