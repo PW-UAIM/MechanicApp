@@ -5,19 +5,19 @@
 <RadzenTemplateForm TItem="VisitData" Data="@model.SelectedVisit" Submit=@OnSubmit>
     <div class="row" style="margin-bottom: 16px">
         <div class="col-md-3">
-            <RadzenLabel Text="Text" />
+            <RadzenLabel Text="Koszt usługi" />
         </div>
         <div class="col">
-            <RadzenNumeric @bind-Value="@model.NewCost" Name="Cost" />
+            <RadzenNumeric @bind-Value="@model.NewCost" Name="Cost" class="text-white" Style="text-align:center " />
             <RadzenRequiredValidator Text="Title is required" Component="Cost" />
         </div>
     </div>
     <div class="row" style="margin-bottom: 16px">
         <div class="col-md-3">
-            <RadzenLabel Text="Start" />
+            <RadzenLabel Text="Zmiana statusu" />
         </div>
         <div class="col">
-            <RadzenTextArea @bind-Value="@model.NewStatus" Name="Status" />
+            <RadzenTextArea @bind-Value="@model.NewStatus" Name="Status" class="text-white" Style="text-align:center" />
             <RadzenRequiredValidator Text="Start is required" Component="Status" />
         </div>
     </div>
