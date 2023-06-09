@@ -3,14 +3,19 @@
 @inject IModel model
 @inject IController controller
 @inject DialogService DialogService
-
+@inject NavigationManager NavManager
 
 <div class="col-lg-10 col-12 text-center mx-auto">
+    <p>
+        <br>
+    </p>
+    <h2 class="mb-1">Moje przeglądy</h2>
+    <br>
 </div>
 <div class="container-fluid py-5">
     <div class="container">
         <RadzenDialog />
-        <RadzenScheduler @ref=@scheduler SlotRender=@OnSlotRender class=" ms-lg-auto shadow-lg img-fluid site-footer-bottom" style="height: 768px;" TItem="VisitData" Data=@model.VisitList StartProperty="ServiceDate" EndProperty="ServiceDate"
+        <RadzenScheduler @ref=@scheduler SlotRender=@OnSlotRender class=" ms-lg-auto shadow-lg img-fluid site-footer-bottom" style="height: 768px; margin:0;" TItem="VisitData" Data=@model.VisitList StartProperty="ServiceDate" EndProperty="ServiceDate"
                          TextProperty="ServiceType" SelectedIndex="0"
                          AppointmentSelect=@OnAppointmentSelect AppointmentRender=@OnAppointmentRender>
             <RadzenMonthView />
@@ -23,6 +28,15 @@
 
 @code {
     RadzenScheduler<VisitData> scheduler;
+
+    protected override void OnInitialized()
+    {
+        //Check if client is logged in
+        if (model.MechanicID == 0 || model.LoginConfirmation == false)
+        {
+            NavManager.NavigateTo("/login");
+        }
+    }
 
     private async Task LoadVisits()
     {

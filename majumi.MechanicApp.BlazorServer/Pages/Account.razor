@@ -104,10 +104,10 @@
 <div class="col-lg-10 col-12 text-center mx-auto">
     <h2 class="mb-5">Zlecone przeglądy</h2>
 </div>
-<div class="container-fluid py-5">
+<div class="container-fluid">
     <div class="container">
         <RadzenDialog />
-        <RadzenDataGrid style="height: 335px" class=" ms-lg-auto shadow-lg img-fluid site-footer-bottom" @ref="carGrid" IsLoading=@isCarGridLoading Count="@carGridCount" Data="@cars" LoadData="@LoadCarData" TItem="CarData">
+        <RadzenDataGrid style="height: 335px; margin: 0; padding:0;" class=" ms-lg-auto shadow-lg img-fluid site-footer-bottom" @ref="carGrid" IsLoading=@isCarGridLoading Count="@carGridCount" Data="@cars" LoadData="@LoadCarData" TItem="CarData">
             <Columns>
                 <RadzenDataGridColumn TItem="CarData" Property="CarID" Title="CarID" />
                 <RadzenDataGridColumn TItem="CarData" Property="ClientID" Title="ClientID" />
@@ -155,10 +155,10 @@
 <div class="col-lg-10 col-12 text-center mx-auto">
     <h2 class="mb-5">Mój terminarz</h2>
 </div>
-<div class="container-fluid py-5">
+<div class="container-fluid">
     <div class="container">
         <RadzenDialog />
-        <RadzenScheduler @ref=@scheduler SlotRender=@OnSlotRender class=" ms-lg-auto shadow-lg img-fluid site-footer-bottom" style="height: 1000px;" TItem="VisitData" Data=@model.VisitList StartProperty="ServiceDate" EndProperty="ServiceDate"
+        <RadzenScheduler @ref=@scheduler SlotRender=@OnSlotRender class=" ms-lg-auto shadow-lg img-fluid site-footer-bottom" style="height: 862px; margin:0; padding: 0;" TItem="VisitData" Data=@model.VisitList StartProperty="ServiceDate" EndProperty="ServiceDate"
                          TextProperty="ServiceType" SelectedIndex="0"
                          AppointmentSelect=@OnAppointmentSelect AppointmentRender=@OnAppointmentRender>
             <RadzenDayView />
