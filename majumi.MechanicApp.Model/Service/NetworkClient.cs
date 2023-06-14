@@ -28,7 +28,7 @@ public class NetworkClient : IClient
 
 	public List<VisitData> GetVisitsAt(int mechanicID, int year, int month, int day)
 	{
-		string callUri = String.Format("/getAllVisitsByMechanicInDay/{0}/{1}/{2}/{3}", mechanicID, year, month, day);
+		string callUri = String.Format("getAllVisitsByMechanicInDay/{0}/{1}/{2}/{3}", mechanicID, year, month, day);
 
 		List<VisitData> result = this.serviceClient.CallWebService<List<VisitData>>(callUri);
 
@@ -36,9 +36,9 @@ public class NetworkClient : IClient
 	}
 	public bool UpdateVisit(int visitID, int mechanicID, string newStatus, int cost)
 	{
-		string callUri = String.Format("updateVisitStatus/{0}/{1}/{2}/{4}", visitID, mechanicID, newStatus, cost);
+		string callUri = String.Format("updateVisitStatus/{0}/{1}/{2}/{3}", visitID, mechanicID, newStatus, cost);
 
-		bool result = this.serviceClient.CallWebService<bool>(callUri);
+		bool result = this.serviceClient.CallWebServicePATCH<bool>(callUri);
 
 		return result;
 	}

@@ -47,7 +47,21 @@ public class ServiceClient
 
 		return result;
 	}
-	public R CallWebService<R, T>(string webServiceUri, T bodyData)
+
+    public R CallWebServicePATCH<R>(string webServiceUri)
+    {
+        Task<string> webServiceCall = CallWebServicePATCH(webServiceUri);
+
+        webServiceCall.Wait();
+
+        string jsonResponseContent = webServiceCall.Result;
+
+        R result = ConvertFromJson<R>(jsonResponseContent);
+
+        return result;
+    }
+
+    public R CallWebService<R, T>(string webServiceUri, T bodyData)
 	{
 		Task<string> webServiceCall = CallWebService(webServiceUri, bodyData);
 
@@ -72,7 +86,20 @@ public class ServiceClient
 		return httpResponseContent;
 	}
 
-	private async Task<string> CallWebService<T>(string callUri, T bodyData)
+    private async Task<string> CallWebServicePATCH(string callUri)
+    {
+        string httpUri = String.Format("http://{0}:{1}/{2}", serviceHost, servicePort, callUri);
+
+        HttpContent httpContent = new StringContent("", Encoding.UTF8);
+        HttpResponseMessage httpResponseMessage = await httpClient.PatchAsync(httpUri, httpContent);
+        httpResponseMessage.EnsureSuccessStatusCode();
+
+        string httpResponseContent = await httpResponseMessage.Content.ReadAsStringAsync();
+
+        return httpResponseContent;
+    }
+
+    private async Task<string> CallWebService<T>(string callUri, T bodyData)
 	{
 		string httpUri = String.Format("http://{0}:{1}/{2}", this.serviceHost, this.servicePort, callUri);
 
