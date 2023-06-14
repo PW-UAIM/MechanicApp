@@ -61,6 +61,7 @@ production:
       - kubectl config set-credentials admin --token=$KUBERNETES_TOKEN
       - kubectl config set-context microk8s --cluster=microk8s-cluster --namespace=default --user=admin
       - kubectl config use-context microk8s
+      - kubectl apply kubectl.yaml
       - kubectl rollout restart deployment/mechanicapp-deploy
     tags:
       - kubernetes
